@@ -7,6 +7,7 @@ TARGET = ColorSource
 QT += core gui widgets
 INCLUDEPATH += .
 QMAKE_CXXFLAGS += -std=c++11 -Wall -pedantic
+QMAKE_LFLAGS += -lm
 
 # Input
 HEADERS += colorsender.h mainwindow.h timer.h matrix.h rpc.h rgb.h array2D.hpp

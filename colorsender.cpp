@@ -1,5 +1,6 @@
 #include "colorsender.h"
 #include <thread>
+#include <cmath>
 #include <QDebug>
 
 #include "rpc.h"
@@ -8,7 +9,7 @@
 
 ColorSender::ColorSender(): id_{0}, color_{QColor{0,0,0}} {
 	config_ = getConfiguration("Color source");
-	timer_ = std::unique_ptr<Timer>{new Timer(std::bind(&ColorSender::packetCallback, this), std::chrono::milliseconds(1000 / config_.framerate))};
+	timer_ = std::unique_ptr<Timer>{new Timer(std::bind(&ColorSender::packetCallback, this), std::chrono::milliseconds((int) ceil(2000.0 / config_.framerate)))};
 	timer_->start();
 }
 
