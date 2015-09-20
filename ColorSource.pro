@@ -9,5 +9,5 @@ INCLUDEPATH += .
 QMAKE_CXXFLAGS += -std=c++11 -Wall -pedantic
 
 # Input
-HEADERS += colorsender.h mainwindow.h timer.h matrix.h rpc.h rgb.h
+HEADERS += colorsender.h mainwindow.h timer.h matrix.h rpc.h rgb.h array2D.hpp
 SOURCES += colorsender.cpp main.cpp mainwindow.cpp timer.cpp rpc.cpp

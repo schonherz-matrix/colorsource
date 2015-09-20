@@ -4,6 +4,7 @@
 //#include "array2D.h"
 #include <vector>
 #include <map>
+#include "array2D.hpp"
 #include "rgb.h"
 
 struct DaemonConfiguration {
@@ -36,7 +37,7 @@ struct EmuConfiguration {
 
 struct Frame { // A Daemon 2db Frame-et kap az RPC híváson keresztül
 	int id;
-	std::vector<RGB> pixels;
+	Array2D<RGB> pixels;
 };
 
 enum SourceEventType {
