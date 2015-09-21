@@ -1,7 +1,5 @@
 #include "timer.h"
 
-#include <iostream>
-
 Timer::Timer(std::function<void (void)>&& task, std::chrono::milliseconds interval): task_{task}, interval_{interval}, stop_{false} {}
 
 void Timer::run() {
@@ -12,7 +10,7 @@ void Timer::run() {
         task_();
         function_execution_time = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - before);
         if (function_execution_time > interval_) {
-            std::cout << "fucky" << std::endl;
+            //std::cout << "fucky" << std::endl;
         };
         std::this_thread::sleep_for(interval_ - function_execution_time);
     }

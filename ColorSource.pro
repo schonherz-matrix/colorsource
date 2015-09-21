@@ -5,10 +5,11 @@
 TEMPLATE = app
 TARGET = ColorSource
 QT += core gui widgets
-INCLUDEPATH += .
+INCLUDEPATH += . ./sw-common
 QMAKE_CXXFLAGS += -std=c++11 -Wall -pedantic
 QMAKE_LFLAGS += -lm
 
 # Input
-HEADERS += colorsender.h mainwindow.h timer.h matrix.h rpc.h rgb.h array2D.hpp
-SOURCES += colorsender.cpp main.cpp mainwindow.cpp timer.cpp rpc.cpp
+HEADERS += colorsender.h mainwindow.h timer.h
+SOURCES += main.cpp colorsender.cpp mainwindow.cpp timer.cpp
+OBJECTS += sw-common/build/lib/libmatrix_sw-common.a
