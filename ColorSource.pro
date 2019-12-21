@@ -4,12 +4,20 @@
 
 TEMPLATE = app
 TARGET = ColorSource
-QT += core gui widgets
-INCLUDEPATH += . ./sw-common
-QMAKE_CXXFLAGS += -std=c++11 -Wall -pedantic -O0 -ggdb
-QMAKE_LFLAGS += -lm
+QT += core gui widgets network
+#QMAKE_CXX = clang++
+#QMAKE_CXXFLAGS += -std=c++11 -Wall -Wno-narrowing -pedantic -O3 -g
+#QMAKE_LFLAGS += -lm
+
+CONFIG += c++17
 
 # Input
-HEADERS += colorsender.h mainwindow.h timer.h
-SOURCES += main.cpp colorsender.cpp mainwindow.cpp timer.cpp
-LIBS += sw-common/build/lib/libmatrix_sw-common.a
+HEADERS += colorsender.h mainwindow.h
+SOURCES += main.cpp colorsender.cpp mainwindow.cpp
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../libmueb/release/ -lmueb
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../libmueb/debug/ -lmueb
+else:unix: LIBS += -L$$OUT_PWD/../libmueb/ -lmueb
+
+INCLUDEPATH += $$PWD/../libmueb/include/libmueb
+DEPENDPATH += $$PWD/../libmueb/include/libmueb
