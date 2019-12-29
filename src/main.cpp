@@ -1,9 +1,11 @@
 #include <QApplication>
-#include "mainwindow.h"
+#include "colorsender.h"
 
 int main(int argc, char *argv[]) {
   QApplication a(argc, argv);
-  MainWindow w;
+
+  ColorSender w;
+  w.setWindowFlags(w.windowFlags() | Qt::WindowMinimizeButtonHint);
   w.show();
 
   return a.exec();

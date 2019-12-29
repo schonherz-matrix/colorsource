@@ -2,11 +2,21 @@
 
 #include <QDebug>
 
-ColorSender::ColorSender(QObject* parent) : QObject(parent) {}
+ColorSender::ColorSender(QWidget *parent,
+                         std::shared_ptr<MuebTransmitter> transmitter)
+    : QColorDialog(parent) {
+  setOptions(QColorDialog::DontUseNativeDialog | QColorDialog::NoButtons);
 
-void ColorSender::setColor(const QColor& color) {
-  color_ = color;
-  QImage frame(32, 26, QImage::Format_RGB888);
-  frame.fill(color_);
-  transmitter_.sendFrame(frame);
+  setWindowFlags(windowFlags() | Qt::MSWindowsFixedSizeDialogHint);
+
+  connect(this, &ColorSender::currentColorChanged, this,
+          &ColorSender::colorChanged);
+
+  if (!transmitter) m_transmitter = std::make_shared<MuebTransmitter>(this);
+}
+
+void ColorSender::colorChanged(const QColor &color) {
+  QImage frame{libmueb::defaults::frame};
+  frame.fill(color);
+  m_transmitter->sendFrame(frame);
 }

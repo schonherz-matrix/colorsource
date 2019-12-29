@@ -1,21 +1,21 @@
-#ifndef COLOR_SENDER_H_INCLUDED
-#define COLOR_SENDER_H_INCLUDED
+#ifndef COLOR_SENDER_H
+#define COLOR_SENDER_H
 
-#include <QColor>
-#include <QObject>
+#include <QColorDialog>
+#include <memory>
 #include "muebtransmitter.h"
 
-class ColorSender : public QObject {
+class ColorSender : public QColorDialog {
   Q_OBJECT
 
-  QColor color_;
-  MuebTransmitter transmitter_;
-
  public:
-  ColorSender(QObject* parent = nullptr);
+  ColorSender(QWidget* parent = nullptr,
+              std::shared_ptr<MuebTransmitter> transmitter = nullptr);
 
- public slots:
-  void setColor(const QColor& color);
+ private:
+  std::shared_ptr<MuebTransmitter> m_transmitter{nullptr};
+
+  void colorChanged(const QColor& color);
 };
 
 #endif
