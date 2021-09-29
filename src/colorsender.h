@@ -12,7 +12,7 @@ class ColorSender : public QColorDialog {
   ColorSender(QWidget* parent = nullptr);
 
  private:
-  MuebTransmitter& m_transmitter;
+  libmueb::MuebTransmitter& transmitter_;
 
   void colorChanged(const QColor& color);
 };

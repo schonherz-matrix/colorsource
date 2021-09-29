@@ -3,7 +3,7 @@
 #include <QDebug>
 
 ColorSender::ColorSender(QWidget *parent)
-    : QColorDialog(parent), m_transmitter(MuebTransmitter::getInstance()) {
+    : QColorDialog(parent), transmitter_(libmueb::MuebTransmitter::Instance()) {
   setOptions(QColorDialog::DontUseNativeDialog | QColorDialog::NoButtons);
 
   setWindowFlags(windowFlags() | Qt::MSWindowsFixedSizeDialogHint);
@@ -13,7 +13,7 @@ ColorSender::ColorSender(QWidget *parent)
 }
 
 void ColorSender::colorChanged(const QColor &color) {
-  QImage frame{libmueb::defaults::frame};
+  QImage frame{transmitter_.frame()};
   frame.fill(color);
-  m_transmitter.sendFrame(frame);
+  transmitter_.SendFrame(frame);
 }
