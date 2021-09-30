@@ -1,7 +1,5 @@
 #include "colorsender.h"
 
-#include <QDebug>
-
 ColorSender::ColorSender(QWidget *parent)
     : QColorDialog(parent), transmitter_(libmueb::MuebTransmitter::Instance()) {
   setOptions(QColorDialog::DontUseNativeDialog | QColorDialog::NoButtons);
